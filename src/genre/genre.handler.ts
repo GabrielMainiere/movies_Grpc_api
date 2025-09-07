@@ -4,7 +4,7 @@ const genreService = new GenreService();
 
 export const GenreHandler = {
   ListGenres(call: any, callback: any): void {
-    callback(null, { movies: genreService.list() });
+    callback(null, { genres: genreService.list() });
   },
 
   GetGenreById(call: any, callback: any): void {
