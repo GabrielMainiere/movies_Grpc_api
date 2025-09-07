@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package movies;
+
+service MovieService {
+  rpc ListMovies (Empty) returns (MovieList);
+  rpc GetMovieById (IdRequest) returns (Movie);
+  rpc CreateMovie (MovieRequest) returns (Movie);
+  rpc UpdateMovie (Movie) returns (Movie);
+  rpc DeleteMovie (IdRequest) returns (Empty);
+  rpc ListActorsByMovie (IdRequest) returns (ActorList);
+  rpc AddActorToMovie (AddActorRequest) returns (Movie);
+}
+
+service ActorService {
+  rpc ListActors (Empty) returns (ActorList);
+  rpc GetActorById (IdRequest) returns (Actor);
+  rpc CreateActor (ActorRequest) returns (Actor);
+  rpc UpdateActor (Actor) returns (Actor);
+  rpc DeleteActor (IdRequest) returns (Empty);
+}
+
+service GenreService {
+  rpc ListGenres (Empty) returns (GenreList);
+  rpc GetGenreById (IdRequest) returns (Genre);
+  rpc CreateGenre (GenreRequest) returns (Genre);
+  rpc UpdateGenre (Genre) returns (Genre);
+  rpc DeleteGenre (IdRequest) returns (Empty);
+}
+
+message Empty {}
+
+message IdRequest {
+  int32 id = 1;
+}
+
+message Movie {
+  int32 id = 1;
+  string title = 2;
+  int32 year = 3;
+  repeated int32 actors = 4; // ids dos atores
+  int32 genreId = 5; // id do gênero
+}
+
+message MovieList {
+  repeated Movie movies = 1;
+}
+
+message MovieRequest {
+  string title = 1;
+  int32 year = 2;
+  int32 genreId = 3;
+}
+
+message Actor {
+  int32 id = 1;
+  string name = 2;
+  string birthDate = 3;
+  repeated int32 movies = 4;
+}
+
+message ActorList {
+  repeated Actor actors = 1;
+}
+
+message ActorRequest {
+  string name = 1;
+  string birthDate = 2;
+}
+
+message Genre {
+  int32 id = 1;
+  string name = 2;
+}
+
+message GenreList {
+  repeated Genre genres = 1;
+}
+
+message GenreRequest {
+  string name = 1;
+}
+
+message AddActorRequest {
+  int32 movieId = 1;
+  int32 actorId = 2;
+}
