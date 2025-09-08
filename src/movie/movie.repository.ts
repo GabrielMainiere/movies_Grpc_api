@@ -24,7 +24,6 @@ export class MovieRepository {
     return newMovie;
   }
 
-
   public update(id: number, movieData: Partial<Omit<IMovie, "id">>): IMovie | undefined {
     const movie = this.findById(id);
     if (!movie) return undefined;
