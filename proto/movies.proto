@@ -55,7 +55,7 @@ message MovieRequest {
 message Actor {
   int32 id = 1;
   string name = 2;
-  string birthDate = 3;
+  string birthdate = 3;
   repeated int32 movies = 4;
 }
 
@@ -65,7 +65,7 @@ message ActorList {
 
 message ActorRequest {
   string name = 1;
-  string birthDate = 2;
+  string birthdate = 2;
 }
 
 message Genre {

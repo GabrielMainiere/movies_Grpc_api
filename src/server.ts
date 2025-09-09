@@ -3,6 +3,8 @@ import * as protoLoader from "@grpc/proto-loader";
 
 import { GenreHandler } from "./genre/genre.handler";
 import path from "path";
+import { MovieHandler } from "./movie/movie.handler";
+import { ActorHandler } from "./actor/actor.handler";
 
 const PROTO_PATH = path.join(__dirname, "../proto/movies.proto");
 
@@ -20,6 +22,8 @@ const moviesPackage = protoDescriptor.movies;
 const server = new grpc.Server();
 
 server.addService(moviesPackage.GenreService.service, GenreHandler);
+server.addService(moviesPackage.MovieService.service, MovieHandler);
+server.addService(moviesPackage.ActorService.service, ActorHandler)
 
 const port = "50051";
 server.bindAsync(
