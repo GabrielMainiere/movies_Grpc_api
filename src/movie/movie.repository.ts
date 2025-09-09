@@ -14,11 +14,8 @@ export class MovieRepository {
 
   public create(movie: Omit<IMovie, "id">): IMovie {
     const newMovie: IMovie = {
-        id: this.currentId++,
-        title: movie.title,
-        year: movie.year,
-        genreId: movie.genreId,
-        actors: movie.actors
+      id: this.currentId++,
+      ...movie
     };
     this.movies.push(newMovie);
     return newMovie;
@@ -27,10 +24,7 @@ export class MovieRepository {
   public update(id: number, movieData: Partial<Omit<IMovie, "id">>): IMovie | undefined {
     const movie = this.findById(id);
     if (!movie) return undefined;
-    if (movieData.title !== undefined) movie.title = movieData.title;
-    if (movieData.year !== undefined) movie.year = movieData.year;
-    if (movieData.genreId !== undefined) movie.genreId = movieData.genreId;
-    if (movieData.actors !== undefined) movie.actors = movieData.actors;
+    Object.assign(movie, movieData);
     return movie;
   }
 
@@ -40,5 +34,4 @@ export class MovieRepository {
     this.movies.splice(index, 1);
     return true;
   }
-
 }
