@@ -32,16 +32,16 @@ export class GenreService {
   public update(genre: IGenre): IGenre {
     const genreUpdate = this.genreRepository.findById(genre.id);
     if (!genreUpdate) {
-      throw new Error(`Genre not found in database.`)
+      throw new Error(`Genre not found in database. Unable to update.`)
     }
     return this.genreRepository.update(genre);
   }
 
   public delete(id: number): void {
     const genre = this.genreRepository.findById(id);
-    
+
     if (!genre) {
-      throw new Error(`Genre with ${id} not found in database.`);
+      throw new Error(`Genre with ${id} not found in database. Unable to delete.`);
     }
     this.genreRepository.delete(id);
   }

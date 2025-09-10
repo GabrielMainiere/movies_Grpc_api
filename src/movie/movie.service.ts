@@ -25,7 +25,7 @@ export class MovieService {
     if (!movie){
       throw new Error(`movie with ${id} not found`);
     }
-    return this.movieRepository.findById(id);
+    return movie;
   }
 
   public create(movie: Omit<IMovie, "id">): IMovie {
